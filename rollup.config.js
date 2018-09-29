@@ -1,11 +1,52 @@
-import babel from 'rollup-plugin-babel'
-import commonjs from 'rollup-plugin-commonjs'
-import external from 'rollup-plugin-peer-deps-external'
-import postcss from 'rollup-plugin-postcss'
-import resolve from 'rollup-plugin-node-resolve'
+import vue from 'rollup-plugin-vue';
 import url from 'rollup-plugin-url'
+import postcss from 'rollup-plugin-postcss';
+import buble from 'rollup-plugin-buble';
+import eslint from 'rollup-plugin-eslint';
+import bundleSize from 'rollup-plugin-filesize';
+import resolve from 'rollup-plugin-node-resolve';
+import commonjs from 'rollup-plugin-commonjs'
 
-import pkg from './package.json'
+import pkg from './package.json';
+
+const isProduction = process.env.NODE_ENV === `production`
+const isDevelopment = process.env.NODE_ENV === `development`
+
+const plugins = [
+  // node resolve
+  resolve(),
+
+  // commonjs plugin
+  commonjs(),
+
+  // eslint
+  eslint(),
+
+  // bundle logger
+  bundleSize(),
+
+  // vue
+  vue({
+    template: {
+      isProduction,
+      compilerOptions: { preserveWhitespace: false }
+    },
+    css: true,
+  }),
+
+  //babel
+  buble({
+    objectAssign: 'Object.assign'
+  }),
+
+  // postcss
+  postcss({
+    modules: true
+  }),
+
+  // url
+  url(),
+];
 
 export default {
   input: 'src/index.js',
@@ -13,68 +54,28 @@ export default {
     {
       file: pkg.main,
       format: 'cjs',
-      sourcemap: true
+      sourcemap: isDevelopment
     },
     {
       file: pkg.module,
       format: 'es',
-      sourcemap: true
+      sourcemap: isDevelopment
     }
   ],
-  plugins: [
-    external(),
-    postcss({
-      modules: true
-    }),
-    url(),
-    babel({
-      exclude: 'node_modules/**'
-    }),
-    resolve(),
-    commonjs()
-  ]
-}
+  plugins,
+};
 
 
+// if(isProduction) {
+//   config.plugins.push(
+//     replace({
+//       'process.env.NODE_ENV': JSON.stringify('production')
+//     })
+//   )
+//   config.plugins.push(uglify())
+// }
 
-
-// import resolve from 'rollup-plugin-node-resolve';
-// import commonjs from 'rollup-plugin-commonjs';
-// import {uglify} from 'rollup-plugin-uglify';
-// import obfuscatorPlugin from 'rollup-plugin-javascript-obfuscator';
-// import pkg from './package.json';
-
-// // entry path
-// const entry = 'src/index.js';
-
-// // get names of package.json dependencies in an array
-// // e.g. ['gsap', 'lodash']
-// const dependencies = Object.entries(pkg.dependencies).map((d) => d[0]);
-
-// export default [
-// 	// browser-friendly UMD build
-// 	{
-// 		input  : entry,
-// 		output : {
-// 			name   : pgk.name,
-// 			file   : pkg.browser,
-// 			format : 'umd',
-// 		},
-// 		plugins : [
-// 			resolve(), // resolve dependencies
-// 			commonjs(), // convert dependencies to es module
-//       uglify(), // uglify
-//       // obfuscatorPlugin()
-// 		]
-// 	},
-//   // ES module (for bundlers) build.
-//   {
-//     input  : entry,
-//     output : {
-//       name   : pgk.name,
-//       file   : pkg.main,
-//       format : 'es',
-//     },
-//     external: dependencies,
-//   }
-// ];
+// if (isDevelopment) {
+//   config.plugins.push(livereload())
+//   )
+// }
