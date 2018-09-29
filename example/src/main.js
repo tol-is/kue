@@ -1,18 +1,15 @@
 /* eslint-disable */
-import Vue from 'vue'
-
-import Kremo from 'kremo';
-console.log(Kremo);
+import Kue from 'Kue';
 
 const states = require.context('./states/', true, /\.js$/);
 const views = require.context('./views/', true, /\.js$/);
 
-consolelog
+import App from './App.vue'
 
-// import App from './App.vue'
+new Kue({
+  views,
+  states,
+  render: h => h(App)
+}).$mount('#root');
 
-// Vue.config.productionTip = false
 
-// new Vue({
-//   render: h => h(App)
-// }).$mount('#app')

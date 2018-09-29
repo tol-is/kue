@@ -1,5 +1,5 @@
 {
-  "name": "kremo",
+  "name": "kue",
   "version": "0.0.1",
   "description": "A prototype for presentation library.",
   "keywords": [
@@ -8,7 +8,7 @@
   ],
   "author": "Apostolos Christodoulou",
   "license": "MIT",
-  "repository": "https://github.com/tol-is/kremo",
+  "repository": "https://github.com/tol-is/kue",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "dependencies": {
