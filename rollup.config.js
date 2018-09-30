@@ -14,13 +14,21 @@ const isDevelopment = process.env.NODE_ENV === `development`
 
 const plugins = [
   // node resolve
-  resolve(),
+  resolve({
+    jsnext: true,
+    main: true,
+    browser: true,
+  }),
 
   // commonjs plugin
   commonjs(),
 
   // eslint
-  eslint(),
+  // eslint({
+  //   exclude: [
+  //     'src/styles/**',
+  //   ],
+  // }),
 
   // bundle logger
   bundleSize(),
@@ -31,6 +39,8 @@ const plugins = [
       isProduction,
       compilerOptions: { preserveWhitespace: false }
     },
+    autoStyles: false,
+    styleToImports: true,
     css: true,
   }),
 
@@ -39,16 +49,23 @@ const plugins = [
     objectAssign: 'Object.assign'
   }),
 
+
   // postcss
   postcss({
+    extensions: ['.css'],
     modules: true
   }),
 
   // url
-  url(),
+  url({
+    limit: 10 * 1024, // inline files < 10k, copy files > 10k
+    include: ["**/*.svg"], // defaults to .svg, .png, .jpg and .gif files
+    emitFiles: true // defaults to true
+  }),
 ];
 
 export default {
+  external: ['vue', 'vuex', 'vue-types'],
   input: 'src/index.js',
   output: [
     {
