@@ -1,0 +1,10 @@
+.slideUp-leave-active,
+.slideUp-enter-active {
+  transition: 1s var(--ease-out-expo);;
+}
+.slideUp-enter {
+  transform: translate(0, 100%);
+}
+.slideUp-leave-to, .slideUp-leave-active {
+  transform: translate(0, -100%);
+}

@@ -1,0 +1,10 @@
+.fadeRight-enter-active,
+.fadeRight-leave-active {
+  transition: 1s var(--ease-out-expo);
+}
+.fadeRight-enter,
+.fadeRight-leave-to,
+.fadeRight-leave-active{
+  opacity: 0;
+  transform: translate(-10%, 0);
+}

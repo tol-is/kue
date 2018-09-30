@@ -1,0 +1,7 @@
+.drawerDown-leave-active,
+.drawerDown-enter-active {
+  transition: 1s var(--ease-out-expo);
+}
+.drawerDown-enter, .drawerDown-leave-to, .drawerDown-leave-active {
+  transform: translate(0, -100%);
+}

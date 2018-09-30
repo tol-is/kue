@@ -1,0 +1,17 @@
+@import './easings.css';
+@import './fade.css';
+
+@import './slideLeft.css';
+@import './slideRight.css';
+@import './slideUp.css';
+@import './slideDown.css';
+
+@import './drawerLeft.css';
+@import './drawerRight.css';
+@import './drawerUp.css';
+@import './drawerDown.css';
+
+@import './fadeLeft.css';
+@import './fadeRight.css';
+@import './fadeUp.css';
+@import './fadeDown.css';

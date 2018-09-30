@@ -1,0 +1,10 @@
+.slideDown-leave-active,
+.slideDown-enter-active {
+  transition: 1s var(--ease-out-expo);
+}
+.slideDown-enter {
+  transform: translate(0, -100%);
+}
+.slideDown-leave-to, .slideDown-leave-active {
+  transform: translate(0, 100%);
+}

@@ -1,5 +1,5 @@
 /* eslint-disable */
-import Kue from 'Kue';
+import Kue, { configureViews, configureStates } from 'Kue';
 
 const states = require.context('./states/');
 const views = require.context('./views/');

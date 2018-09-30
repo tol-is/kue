@@ -12,14 +12,5 @@ export default {
       },
     },
   ],
-  hotspots: [
-    {
-      title: 'hey',
-      message: 'side menu info',
-      left: '15%',
-      top: '40%',
-      to: 'browse',
-    },
-  ],
   next: 'create',
 };

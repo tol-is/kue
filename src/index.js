@@ -1,5 +1,7 @@
 import Vue from 'vue'
-import Vuex from 'vuex';
+
+import './styles/main.css';
+import'./styles/transitions/index.css';
 
 import configureViews from './configure-views';
 import configureStore from './configure-store';

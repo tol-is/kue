@@ -11,11 +11,11 @@
         :z-index="v.zIndex"
       />
     </scene-container>
-    <hotspot
+    <!-- <hotspot
       v-for="(h,i) in hotspots"
       :key="`hs-${i}`"
       :spot="h"
-    />
+    /> -->
   </app-container>
 
 </template>

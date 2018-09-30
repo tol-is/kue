@@ -1,16 +1,25 @@
+import path from 'path';
+import babel from 'rollup-plugin-babel'
+
 import vue from 'rollup-plugin-vue';
 import url from 'rollup-plugin-url'
 import postcss from 'rollup-plugin-postcss';
-import buble from 'rollup-plugin-buble';
+// import babel from 'rollup-plugin-buble';
 import eslint from 'rollup-plugin-eslint';
 import bundleSize from 'rollup-plugin-filesize';
 import resolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs'
 
+import cssimport from 'postcss-import';
+import presetEnv from 'postcss-preset-env';
+
 import pkg from './package.json';
 
-const isProduction = process.env.NODE_ENV === `production`
-const isDevelopment = process.env.NODE_ENV === `development`
+const isProduction = process.env.NODE_ENV === `production`;
+const isDevelopment = process.env.NODE_ENV === `development`;
+
+const src = path.resolve(__dirname, '..', 'src');
+const root = path.resolve(__dirname, '../');
 
 const plugins = [
   // node resolve
@@ -44,16 +53,38 @@ const plugins = [
     css: true,
   }),
 
-  //babel
-  buble({
-    objectAssign: 'Object.assign'
-  }),
-
 
   // postcss
   postcss({
     extensions: ['.css'],
-    modules: true
+    modules: false,
+    plugins: [
+      cssimport({
+        root: root,
+        path: [
+          src,
+        ],
+      }),
+      presetEnv({
+        stage    : 1,
+          features : {
+            'nesting-rules': true,
+          },
+          browsers : [
+            '>1%',
+            'last 4 versions',
+          ],
+      }),
+    ]
+  }),
+
+
+  //babel
+  // buble({
+  //   objectAssign: 'Object.assign'
+  // }),
+  babel({
+    exclude: ['node_modules/**', 'src/styles/**']
   }),
 
   // url
@@ -68,11 +99,6 @@ export default {
   external: ['vue', 'vuex', 'vue-types'],
   input: 'src/index.js',
   output: [
-    {
-      file: pkg.main,
-      format: 'cjs',
-      sourcemap: isDevelopment
-    },
     {
       file: pkg.module,
       format: 'es',

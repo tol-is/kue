@@ -1,0 +1,7 @@
+.drawerUp-leave-active,
+.drawerUp-enter-active {
+  transition: 1s var(--ease-out-expo);;
+}
+.drawerUp-enter, .drawerUp-leave-to, .drawerUp-leave-active {
+  transform: translate(0, 100%);
+}

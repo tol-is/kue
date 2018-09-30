@@ -1,0 +1,7 @@
+.drawerRight-leave-active,
+.drawerRight-enter-active {
+  transition: 1s;
+}
+.drawerRight-enter, .drawerRight-leave-to, .drawerRight-leave-active {
+  transform: translate(100%, 0);
+}
