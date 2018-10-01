@@ -4,9 +4,9 @@ import Vuex from 'vuex';
 
 export default context => {
   Vue.use(Vuex);
+
   const appSettings = {
     state: {
-      frame: 'desktop',
       width: undefined,
       height: undefined,
     },
@@ -54,6 +54,9 @@ const createSMfromStateContext = context => {
         if (!nextNodeId) return;
         const nextNode = smNodes.find((n) => n.id === nextNodeId);
         context.commit('sm_to', nextNode);
+      },
+      sm_to(context, to) {
+        console.log('goto');
       },
       sm_reset(context) {
         context.commit('sm_reset');

@@ -6,6 +6,6 @@
   .drawer-menu{
     background-color: red;
     color: white;
-    flex: 1 auto;
+    flex: 1 1 100%;
   }
 </style>

@@ -1,9 +1,5 @@
 <template>
-  <transition
-    appear
-    mode="out-in"
-    v-bind:name="transitionName"
-  >
+  <transition appear mode="out-in" v-bind:name="transitionName" >
     <div class="scene-layer" :style="layerStyle">
       <comp :is="view" />
     </div>
@@ -11,9 +7,7 @@
 </template>
 
 <script>
-
 import VueTypes from 'vue-types';
-
 export default {
   name: 'scene-layer',
   props: {
@@ -37,8 +31,6 @@ export default {
       height: VueTypes.string.def('100%'),
       maxHeight: VueTypes.string.def('100%'),
     }),
-
-    // ['view', 'transition', 'zIndex', positions],
   },
   computed: {
     transitionName() {
@@ -46,7 +38,6 @@ export default {
     },
 
     layerStyle() {
-      // console.log(this.$props);
       return {
         ...this.$props.position,
       };
@@ -56,7 +47,6 @@ export default {
 </script>
 
 <style scoped>
-
   .scene-layer{
     position: absolute;
     display: flex;

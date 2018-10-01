@@ -1,6 +1,6 @@
 <template>
-  <app-container>
-    <scene-container >
+  <main class="app-container">
+    <div class="scene-container" v-on:click="onclick">
       <scene-layer
         v-for="v in views"
         :key="v.component"
@@ -10,25 +10,17 @@
         :data="v.data"
         :z-index="v.zIndex"
       />
-    </scene-container>
-    <!-- <hotspot
-      v-for="(h,i) in hotspots"
-      :key="`hs-${i}`"
-      :spot="h"
-    /> -->
-  </app-container>
-
+    </div>
+  </main>
 </template>
 
 <script>
-
 export default {
   name: 'SceneManager',
   computed: {
     views() {
       let vuez = [];
       let skip = 0;
-
 
       this.$store.state.sm.history.every((n) => {
         const nodeVuez = n.views.map(v => ({
@@ -53,10 +45,36 @@ export default {
 
       return vuez;
     },
-
-    hotspots() {
-      return this.$store.state.sm.history[0].hotspots;
+  },
+  methods: {
+    onclick(e) {
+      e.preventDefault();
+      const currentState = this.$store.state.sm.history[0];
+      if (currentState.next) {
+        this.$store.dispatch('sm_next');
+      }
     },
   },
 };
 </script>
+
+<style scoped>
+  .app-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  .scene-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+  }
+</style>

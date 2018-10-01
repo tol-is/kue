@@ -1,27 +1,14 @@
 <template>
-  <div
-    class="scene-container"
-    v-on:click="onclick"
-  >
+  <div class="scene-container" v-on:click="onclick">
     <div class="scene-container__inner-wrap">
       <slot/>
     </div>
   </div>
 </template>
 
-
 <script>
-
 export default {
-  methods: {
-    onclick(e) {
-      e.preventDefault();
-      const currentState = this.$store.state.sm.history[0];
-      if (currentState.next) {
-        this.$store.dispatch('sm_next');
-      }
-    },
-  },
+
 };
 </script>
 
@@ -29,7 +16,7 @@ export default {
   .scene-container {
     position: relative;
     width: 100%;
-    height: 100%;
+    height: 100vh;
     display: block;
     overflow: hidden;
   }
